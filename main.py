@@ -45,6 +45,23 @@ response = requests.post(
 
 # Получаем текст статьи
 data = response.json()
+response = requests.post(url = "https://openrouter.ai/api/v1/chat/completions"
+
+headers = {
+    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+    "Content-Type": "application/json"
+}
+
+payload = {
+    "model": "deepseek/deepseek-chat-v3-0324:free",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Напиши короткую статью про мобильные игры"
+        }
+    ]
+}
+
 response = requests.post(url, headers=headers, json=payload)
 data = response.json()
 
