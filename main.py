@@ -26,15 +26,31 @@ PROMPT = """
 """
 
 # Запрос к OpenRouter
+response = requests.post(urlurl = "https://openrouter.ai/api/v1/chat/completions"
+
+headers = {
+    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+    "Content-Type": "application/json"
+}
+
+payload = {
+    "model": "deepseek/deepseek-chat-v3-0324:free",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Напиши короткую статью про мобильные игры"
+        }
+    ]
+}
+
 response = requests.post(url, headers=headers, json=payload)
 data = response.json()
 
 print("OPENROUTER RESPONSE:")
 print(data)
 
-# ❗ ЖЁСТКАЯ ПРОВЕРКА
 if "choices" not in data:
-    raise Exception("OpenRouter failed: " + str(data))
+    raise Exception("OpenRouter error: " + str(data))
 
 article = data["choices"][0]["message"]["content"]
 
