@@ -26,22 +26,17 @@ PROMPT = """
 """
 
 # Запрос к OpenRouter
-response = requests.post(
-    url="https://openrouter.ai/api/v1/chat/completions",
-    headers={
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json"
-    },
-    json={
-        "model": "google/gemini-2.0-flash-exp:free",
-        "messages": [
-            {
-                "role": "user",
-                "content": PROMPT
-            }
-        ]
-    }
-)
+response = requests.post(url, headers=headers, json=payload)
+data = response.json()
+
+print("OPENROUTER RESPONSE:")
+print(data)
+
+# ❗ ЖЁСТКАЯ ПРОВЕРКА
+if "choices" not in data:
+    raise Exception("OpenRouter failed: " + str(data))
+
+article = data["choices"][0]["message"]["content"]
 
 # Получаем текст статьи
 url = "https://openrouter.ai/api/v1/chat/completions"
