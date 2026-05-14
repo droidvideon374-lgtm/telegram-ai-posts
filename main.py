@@ -44,8 +44,7 @@ response = requests.post(
 )
 
 # Получаем текст статьи
-data = response.json()
-response = requests.post(url = "https://openrouter.ai/api/v1/chat/completions"
+url = "https://openrouter.ai/api/v1/chat/completions"
 
 headers = {
     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
@@ -67,7 +66,6 @@ data = response.json()
 
 print("OPENROUTER RESPONSE:")
 print(data)
-article = data["choices"][0]["message"]["content"]
 
 # Отправка в Telegram
 telegram_url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
