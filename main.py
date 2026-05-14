@@ -45,7 +45,11 @@ response = requests.post(
 
 # Получаем текст статьи
 data = response.json()
+response = requests.post(url, headers=headers, json=payload)
+data = response.json()
 
+print("OPENROUTER RESPONSE:")
+print(data)
 article = data["choices"][0]["message"]["content"]
 
 # Отправка в Telegram
